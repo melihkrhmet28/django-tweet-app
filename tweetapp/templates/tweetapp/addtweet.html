@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="mb-4 mx-5">Add Tweet</h1>
+    <form  method="post" class="mt-4 col-md-6 m-5">
+        {% csrf_token %}
+        <!-- <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname" class="form-control" required> -->
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary">send Tweet</button>
+    </form>
+{% endblock %}

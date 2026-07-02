@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="mb-4 mx-5">List of Tweets</h1>
+    <ul class="list-group mt-4 col-md-6 m-5">
+        {% csrf_token %}
+        <div class="container">
+            {% for tweet in tweets %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ tweet.username }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ tweet.message }}</p>
+                    </div>
+                    {% if user.is_authenticated and tweet.username == user %}
+                        <div class="card-footer">
+                            <form method="post" action="{% url 'tweetapp:deletetweet' tweet.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </ul>
+{% endblock %}
